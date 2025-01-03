@@ -1,0 +1,28 @@
+# First, make sure you have installed the chatterbot library
+# You can install it using: pip install chatterbot chatterbot_corpus
+
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+# Create a new instance of a ChatBot
+faq_bot = ChatBot('FAQBot')
+
+# Create a new trainer for the chatbot
+trainer = ChatterBotCorpusTrainer(faq_bot)
+
+# Train the chatbot based on the English corpus
+trainer.train("chatterbot.corpus.english")
+
+# Function to get a response from the chatbot
+def get_response(question):
+    response = faq_bot.get_response(question)
+    return response
+
+# Example usage
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == "exit":
+        print("Exiting chatbot. Goodbye!")
+        break
+    bot_response = get_response(user_input)
+    print(f'FAQBot: {bot_response}')
